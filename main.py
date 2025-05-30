@@ -11,6 +11,7 @@ from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import (accuracy_score, confusion_matrix, precision_recall_fscore_support,
                              classification_report, roc_curve, roc_auc_score)
+import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input
 from tensorflow.keras.applications.densenet import DenseNet121
@@ -27,6 +28,10 @@ from tensorflow.keras.layers import (Conv2D, Lambda,MaxPooling2D, Flatten, Dense
                                      GlobalAveragePooling2D, GlobalMaxPooling2D, 
                                      Reshape, Multiply, Add, Concatenate)
  
+
+print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
+os.environ['CUDA_VISIBLE_DEVICES'] = '0' 
+
 # training and testing dataset
 train_dir = "path/to/train/data"
 test_dir = "path/to/test/data"
